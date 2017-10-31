@@ -10,7 +10,7 @@ AWS = {
 ES = {
     "host": os.getenv("MORPH_ES_HOST", "127.0.0.1"),
     "port": os.getenv("MORPH_ES_PORT", 9200),
-    "index": os.getenv("MORPH_ES_INDEX", "healthtools-dev")
+    "index": os.getenv("MORPH_ES_INDEX", "cele-dev")
 }
 
 SLACK = {
@@ -76,9 +76,9 @@ LOGGING = {
 
         "slack_log": {
             "level": "WARNING",
-            "api_key": os.getenv('SLACK_API_TOKEN', None),
+            "api_key": os.getenv('MORPH_SLACK_API_TOKEN', None),
             "class": "slacker_log_handler.SlackerLogHandler",
-            "channel": os.getenv('SLACK_LOGGER_CHANNEL', None),
+            "channel": os.getenv('MORPH_SLACK_LOGGER_CHANNEL', None),
             "username": "Scrapper Slack Logger",
             "stack_trace": True,
             "formatter": "slack",
