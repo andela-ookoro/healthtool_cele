@@ -20,6 +20,7 @@ def setup_logging(default_level=logging.INFO):
         logging.basicConfig(level=default_level)
 
 if __name__ == "__main__":
+    print('hello world')
     # set logging
     setup_logging()
     # Initialize the Scrapers
