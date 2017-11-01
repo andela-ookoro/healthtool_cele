@@ -25,6 +25,7 @@ def setup_logging(default_level=logging.INFO):
 
 
 
+
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 import time
@@ -37,6 +38,8 @@ def scrapers():
     '''
     # record the start time
     start_time = time.time()
+    # set logging
+    setup_logging()
     # Initialize the Scrapers
     doctors_scraper = DoctorsScraper()
     foreign_doctors_scraper = ForeignDoctorsScraper()

@@ -37,7 +37,7 @@ else:
 
 # sites to be scraped
 SITES = {
-    "DOCTORS": "http://medicalboard.co.ke/online-services/retention/?currpage={}",
+    "DOCTORS": "https://medicalboard.co.ke/online-services/retention/?currpage={}",
     "FOREIGN_DOCTORS": "http://medicalboard.co.ke/online-services/foreign-doctors-license-register/?currpage={}",
     "CLINICAL_OFFICERS": "http://clinicalofficerscouncil.org/online-services/retention/?currpage={}",
     "TOKEN_URL": "http://api.kmhfl.health.go.ke/o/token/",
