@@ -58,7 +58,7 @@ def scrapers():
     Doctors are a combination of local and foreign doctors. If the local
     doctors' scraper fails, we shouldn't scrape the foreign doctors.
     '''
-    start_execution = time()
+    start_execution = time.time()
 
     doctors_result = doctors_scraper.run_scraper()
     if doctors_result:
@@ -88,7 +88,7 @@ def scrapers():
     nhif_outpatient_result = nhif_outpatient_scraper.run_scraper()
     nhif_outpatient_cs_result = nhif_outpatient_cs_scraper.run_scraper()
 
-    total_runtime = time() - start_execution
+    total_runtime = time.time() - start_execution
     m, s = divmod(total_runtime, 60)
     h, m = divmod(m, 60)
     time_taken = "%dhr:%02dmin:%02dsec" % (
