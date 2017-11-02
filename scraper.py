@@ -114,7 +114,7 @@ def scrapers():
     # record end time
     end_time = time.time()
     timeSent = (end_time - start_time) / (60)
-    if(timeSent >= 30):
+    if(timeSent >= 15):
         log.warning('Scraper: {} ran for about {} minutes'.format(scraper_id, timeSent))
 
 if __name__ == "__main__":
@@ -122,12 +122,12 @@ if __name__ == "__main__":
     # Start the scrapers
     scraping = multiprocessing.Process(target=scrapers)
     scraping.start()
-    scraping.join(30*60)
+    scraping.join(10*60)
 
     # log error if scraping is still running after 30 minutes
     if scraping.is_alive():
         # create a random Id for this scrap instance
         import random
         scraper_id = random.randint(1, 100000)
-        log.warning('Scraper: {} is running for more than 30 minutes'.format(scraper_id))
+        log.warning('Scraper: {} is running for more than 10 minutes'.format(scraper_id))
 
