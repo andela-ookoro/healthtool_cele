@@ -114,7 +114,7 @@ def scrapers():
     # record end time
     end_time = time.time()
     timeSent = (end_time - start_time) / (60)
-    if(response_time_in_minutes >= 30):
+    if(timeSent >= 30):
         log.warning('Scraper: {} ran for about {} minutes'.format(scraper_id, timeSent))
 
 if __name__ == "__main__":
