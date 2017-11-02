@@ -17,6 +17,9 @@ from healthtools.config import LOGGING
 
 log = logging.getLogger(__name__)
 
+# create a random Id for this scrap instance
+import random
+scraper_id = random.randint(1, 100000)
 def setup_logging(default_level=logging.INFO):
     """
     Setup logging configuration
@@ -140,9 +143,6 @@ if __name__ == "__main__":
 
     # log error if scraping is still running after 30 minutes
     if scraping.is_alive():
-        # create a random Id for this scrap instance
-        import random
-        scraper_id = random.randint(1, 100000)
         log.warning('Scraper: {} is running for more than 10 minutes'.format(scraper_id))
 
 
