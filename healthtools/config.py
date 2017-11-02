@@ -52,7 +52,7 @@ NHIF_SERVICES = ["inpatient", "outpatient", "outpatient-cs"]
 
 LOGGING = {
     "version": 1,
-    "disable_existing_loggers": False,
+    "disable_existing_loggers": True,
     "formatters": {
         "simple": {
             "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -81,14 +81,15 @@ LOGGING = {
             "channel": os.getenv('MORPH_SLACK_LOGGER_CHANNEL', None),
             "username": "Scrapper Slack Logger",
             "stack_trace": True,
-            "formatter": "slack",
-            "fail_silent": True #would not raise an error when api token is invalid
+            "formatter": "simple",
+            "fail_silent": False #would not raise an error when api token is invalid
         }
 
     },
 
     "root": {
-        "level": "INFO",
+        "level": "DEBUG",
         "handlers": ["console","slack_log"]
     }
 }
+
