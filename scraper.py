@@ -129,10 +129,6 @@ def scrapers():
     if(m >= 30):
         log.warning('Scraper: {} ran for about {}'.format(scraper_id, time_taken))
 
-    scraper_stats.archive_data(json.dumps(scraping_statistics))
-
-
-    logger.debug('debug message')
 if __name__ == "__main__":
     setup_logging()
     import multiprocessing
