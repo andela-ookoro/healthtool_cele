@@ -40,7 +40,6 @@ def setup_logging(default_level=logging.INFO):
         except Exception as ex:
             log.error('Unable to add slack_logger', str(ex))
 
-    
 # create a random Id for this scrap instance
 scraper_id = random.randint(1, 100000)
 
@@ -97,6 +96,7 @@ def scrapers():
     nhif_outpatient_result = nhif_outpatient_scraper.run_scraper()
     nhif_outpatient_cs_result = nhif_outpatient_cs_scraper.run_scraper()
 
+
     total_runtime = time() - start_time
     m, s = divmod(total_runtime, 60)
     h, m = divmod(m, 60)
@@ -124,18 +124,8 @@ def scrapers():
     if(m >= 10):
         log.warning('Scraper: {} ran for about {}'.format(scraper_id, time_taken))
 
-def test_python_slacker_logger():
-    from slack_logger import SlackHandler, SlackFormatter
-    import os
-    logger = logging.getLogger(__name__)
-    logger.setLevel(logging.DEBUG)
+    scraper_stats.archive_data(json.dumps(scraping_statistics))
 
-    sh = SlackHandler(username='Mayowa', icon_emoji=':robot_face:', url=os.getenv("MORPH_WEBHOOK_URL"))
-    sh.setLevel(logging.DEBUG)
-
-    f = SlackFormatter()
-    sh.setFormatter(f)
-    logger.addHandler(sh)
 
     logger.debug('debug message')
 if __name__ == "__main__":
@@ -148,5 +138,9 @@ if __name__ == "__main__":
 
     # log error if scraping is still running after 30 minutes
     if scraping.is_alive():
-        log.warning('Scraper: {} is running for more than 30 minutes'.format(scraper_id))
+        # create a random Id for this scrap instance
+        import random
+        scraper_id = random.randint(1, 100000)
+        log.warning('Scraper: {} is running for more than 10 minutes'.format(scraper_id))
+
 
