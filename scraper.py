@@ -40,8 +40,7 @@ def setup_logging(default_level=logging.INFO):
         except Exception as ex:
             log.error('Unable to add slack_logger', str(ex))
 
-
-
+    
 # create a random Id for this scrap instance
 scraper_id = random.randint(1, 100000)
 
@@ -131,7 +130,7 @@ if __name__ == "__main__":
     # Start the scrapers
     scraping = multiprocessing.Process(target=scrapers)
     scraping.start()
-    scraping.join(30*60)
+    scraping.join(30 * 60)
 
     # log error if scraping is still running after 30 minutes
     if scraping.is_alive():
