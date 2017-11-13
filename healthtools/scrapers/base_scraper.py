@@ -436,3 +436,18 @@ class Scraper(object):
                 headers={"Content-Type": "application/json"}
             )
         return response
+
+        
+    def parse_date(self, datetime_string):
+        '''
+        Parse a string into a datetime object 
+        :param datetime_string: the datetime string to parse
+        :return: datetime object
+        '''
+        from dateutil.parser import parse   
+        try:
+            dateobject = parse(datetime_string)
+            return dateobject
+        except Exception as ex:
+            log.error('Can not create a the datetime object from {}.'.format(datetime_string))
+            return None

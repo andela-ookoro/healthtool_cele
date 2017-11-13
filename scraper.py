@@ -50,6 +50,7 @@ def scrapers():
     '''
     # record the start time
     start_time = time()
+    
     # Initialize the Scrapers
     doctors_scraper = DoctorsScraper()
     foreign_doctors_scraper = ForeignDoctorsScraper()
@@ -119,9 +120,10 @@ def scrapers():
     scraper_stats = Scraper()
     scraper_stats.data_key = "stats.json"
     scraper_stats.data_archive_key = "stats/stats-{}.json"
-    scraper_stats.archive_data(json.dumps(scraping_statistics, indent=4))
+    scraper_stats.archive_data(json.dumps(scraping_statistics))
+    
     # log warning when scraper ran more than 30 minutes
-    if(m >= 30):
+    if(m >= 20):
         log.warning('Scraper: {} ran for about {}'.format(scraper_id, time_taken))
 
 if __name__ == "__main__":
@@ -130,9 +132,8 @@ if __name__ == "__main__":
     # Start the scrapers
     scraping = multiprocessing.Process(target=scrapers)
     scraping.start()
-    scraping.join(30 * 60)
+    scraping.join(20 * 60)
 
     # log error if scraping is still running after 30 minutes
     if scraping.is_alive():
         log.warning('Scraper: {} is running for more than 30 minutes'.format(scraper_id))
-
