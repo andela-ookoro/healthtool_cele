@@ -10,7 +10,7 @@ AWS = {
 ES = {
     "host": os.getenv("MORPH_ES_HOST", "127.0.0.1"),
     "port": os.getenv("MORPH_ES_PORT", 9200),
-    "index": os.getenv("MORPH_ES_INDEX", "healthtools-dev")
+    "index": os.getenv("MORPH_ES_INDEX", "cele-dev")
 }
 
 SLACK = {
@@ -37,7 +37,7 @@ else:
 
 # sites to be scraped
 SITES = {
-    "DOCTORS": "http://medicalboard.co.ke/online-services/retention/?currpage={}",
+    "DOCTORS": "https://medicalboard.co.ke/online-services/retention/?currpage={}",
     "FOREIGN_DOCTORS": "http://medicalboard.co.ke/online-services/foreign-doctors-license-register/?currpage={}",
     "CLINICAL_OFFICERS": "http://clinicalofficerscouncil.org/online-services/retention/?currpage={}",
     "TOKEN_URL": "http://api.kmhfl.health.go.ke/o/token/",
@@ -58,7 +58,6 @@ LOGGING = {
             "datefmt": "%Y-%m-%d %H:%M:%S"
         }
     },
-
     "handlers": {
         "console": {
             "class": "logging.StreamHandler",
@@ -73,3 +72,4 @@ LOGGING = {
         "handlers": ["console"]
     }
 }
+

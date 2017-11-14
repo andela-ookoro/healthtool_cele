@@ -17,6 +17,10 @@ from healthtools.config import LOGGING
 
 log = logging.getLogger(__name__)
 
+# create a random Id for this scrap instance
+import random
+scraper_id = random.randint(1, 100000)
+
 def setup_logging(default_level=logging.INFO):
     """
     Setup logging configuration
@@ -33,16 +37,11 @@ def setup_logging(default_level=logging.INFO):
         try:
             sh = SlackHandler(username='Scraper Logger', url=SLACK_URL)
             sh.setLevel(logging.WARNING)
-
             f = SlackFormatter()
             sh.setFormatter(f)
             log.addHandler(sh)
         except Exception as ex:
             log.error('Unable to add slack_logger', str(ex))
-
-    
-# create a random Id for this scrap instance
-scraper_id = random.randint(1, 100000)
 
 def scrapers():
     '''
@@ -55,7 +54,7 @@ def scrapers():
     doctors_scraper = DoctorsScraper()
     foreign_doctors_scraper = ForeignDoctorsScraper()
     clinical_officers_scraper = ClinicalOfficersScraper()
-    healthfacilities_scraper = HealthFacilitiesScraper()
+    # healthfacilities_scraper = HealthFacilitiesScraper()
 
     nhif_inpatient_scraper = NhifInpatientScraper()
     nhif_outpatient_scraper = NhifOutpatientScraper()
@@ -87,7 +86,7 @@ def scrapers():
     -------------------------
     Scrapes the government's Kenya Health Facilities Master List.
     '''
-    healthfacilities_result = healthfacilities_scraper.run_scraper()
+    # healthfacilities_result = healthfacilities_scraper.run_scraper()
 
     '''
     NHIF Scraper
@@ -97,6 +96,7 @@ def scrapers():
     nhif_inpatient_result = nhif_inpatient_scraper.run_scraper()
     nhif_outpatient_result = nhif_outpatient_scraper.run_scraper()
     nhif_outpatient_cs_result = nhif_outpatient_cs_scraper.run_scraper()
+
 
     total_runtime = time() - start_time
     m, s = divmod(total_runtime, 60)
@@ -110,7 +110,7 @@ def scrapers():
         'doctors_scraper': doctors_scraper.stat_log,
         'foreign_doctors_scraper': foreign_doctors_scraper.stat_log,
         'clinical_officers_scraper': clinical_officers_scraper.stat_log,
-        'healthfacilities_scraper': healthfacilities_scraper.stat_log,
+        # 'healthfacilities_scraper': healthfacilities_scraper.stat_log,
         'nhif_inpatient_scraper': nhif_inpatient_scraper.stat_log,
         'nhif_outpatient_cs_scraper': nhif_outpatient_cs_scraper.stat_log,
         'nhif_outpatient_scraper': nhif_outpatient_scraper.stat_log,
@@ -123,7 +123,7 @@ def scrapers():
     scraper_stats.archive_data(json.dumps(scraping_statistics))
     
     # log warning when scraper ran more than 30 minutes
-    if(m >= 20):
+    if(m >= 10):
         log.warning('Scraper: {} ran for about {}'.format(scraper_id, time_taken))
 
 if __name__ == "__main__":
@@ -132,8 +132,10 @@ if __name__ == "__main__":
     # Start the scrapers
     scraping = multiprocessing.Process(target=scrapers)
     scraping.start()
-    scraping.join(20 * 60)
+    scraping.join(10 * 60)
 
     # log error if scraping is still running after 30 minutes
     if scraping.is_alive():
-        log.warning('Scraper: {} is running for more than 30 minutes'.format(scraper_id))
+        log.warning('Scraper: {} is running for more than 10 minutes'.format(scraper_id))
+
+
